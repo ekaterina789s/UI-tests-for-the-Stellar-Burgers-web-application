@@ -1,6 +1,7 @@
 import com.github.javafaker.Faker;
 import io.qameta.allure.Description;
 import io.qameta.allure.junit4.DisplayName;
+import org.junit.Assert;
 import org.junit.Test;
 import page.MainPage;
 
@@ -61,5 +62,38 @@ public class RegistrationTest extends BaseUITest {
 
         assertNotNull("Должна открыться главная страница приложения", mainPage2);
 
+    }
+
+    @Test
+    @DisplayName("Регистрация с некорректным паролем")
+    @Description("Должна появиться ошибка из-за некорректного пароля")
+    public void registration_InvalidPasswordTest() {
+
+        MainPage mainPage = new MainPage(driver);
+
+        AuthorizationPage authPage = mainPage.clickButtonPersonalAccount();
+
+        RegistrationPage regPage = authPage.clickLinkRegister();
+
+        //заполнение полей и клик по кнопке "Зарегистрироваться"
+
+        Faker faker = new Faker();
+
+        String testName = faker.name().fullName();
+        String testEmail = faker.internet().emailAddress();
+        String testPassword = "123";
+
+        regPage.writeName(testName);
+        System.out.println("Name filled: " + testName);
+
+        regPage.writeEmail(testEmail);
+        System.out.println("Email filled: " + testEmail);
+
+        regPage.writePassword(testPassword);
+        System.out.println("Password filled: " + testPassword);
+
+        String errorText = regPage.clickButtonRegister_Error();
+
+        Assert.assertEquals("Некорректный пароль", errorText);
     }
 }
