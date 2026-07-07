@@ -7,6 +7,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import page.AuthorizationPage;
 import page.MainPage;
+import page.RegistrationPage;
 import user.UserModel;
 
 import static api.BaseUriData.BASE_URI;
@@ -64,6 +65,31 @@ public class AuthorizationTest extends BaseUITest {
 
         authPage.fillEmailAndPassword_AuthPage(email, password);
         MainPage mainPage2 = authPage.clickButtonEnter();
+
+        Assert.assertNotNull("Должна открыться главная страница", mainPage2);
+    }
+
+    @Test
+    @DisplayName("Вход через кнопку в форме регистрации")
+    @Description("Пользователь должен успешно авторизоваться")
+    public void authorization_ButtonRegistrationFormTest() {
+        String email = faker.internet().emailAddress();
+        String password = "password123";
+        String name = faker.name().fullName();
+
+        userModel = new UserModel(email, password, name);
+        var response = createUniqueUser(userModel);
+
+        MainPage mainPage = new MainPage(driver);
+        AuthorizationPage authPage = mainPage.clickButtonEnterAccount();
+
+        RegistrationPage regPage = authPage.clickLinkRegister();
+
+        AuthorizationPage authPage2 = regPage.clickLinkEnter();
+
+        authPage2.fillEmailAndPassword_AuthPage(email, password);
+
+        MainPage mainPage2 = authPage2.clickButtonEnter();
 
         Assert.assertNotNull("Должна открыться главная страница", mainPage2);
     }
