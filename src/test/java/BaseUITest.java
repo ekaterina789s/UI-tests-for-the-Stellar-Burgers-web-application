@@ -12,7 +12,7 @@ public class BaseUITest {
 
     // ================= МЕНЯТЬ ТОЛЬКО ЗДЕСЬ =================
     // Поставьте "chrome" для обычного Chrome, "yandex" для Яндекс Браузера
-    private static final String TARGET_BROWSER = "chrome";
+    private static final String TARGET_BROWSER = "yandex";
     // =======================================================
 
     @Before
@@ -34,7 +34,7 @@ public class BaseUITest {
 
         driver = new ChromeDriver(options);
         driver.get("https://stellarburgers.education-services.ru/");
-        driver.manage().window().setSize(new Dimension(1920, 1080));
+
     }
 
     @After
