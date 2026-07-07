@@ -3,7 +3,9 @@ import io.qameta.allure.Description;
 import io.qameta.allure.junit4.DisplayName;
 import org.junit.Assert;
 import org.junit.Test;
+import page.AuthorizationPage;
 import page.MainPage;
+import page.RegistrationPage;
 
 import static org.junit.Assert.assertNotNull;
 
