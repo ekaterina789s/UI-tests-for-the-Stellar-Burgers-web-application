@@ -32,7 +32,7 @@ public class RegistrationPage {
     private static final By BUTTON_REGISTER = By.xpath("//button[@class='button_button__33qZ0 button_button_type_primary__1O7Bx button_button_size_medium__3zxIa'][text()='Зарегистрироваться']");
 
     //локатор ошибки "Некорректный пароль"
-    private static final By ERROR_INVALID_PASSWORD = By.xpath(".//div[contains(@class, 'input__container')]//*[contains(text(), 'пароль')]");
+    private static final By ERROR_INVALID_PASSWORD = By.xpath(".//p[text()='Некорректный пароль']");
 
     //локатор ссылки "Войти"
     private static final By LINK_ENTER = By.xpath(".//p[text()='Уже зарегистрированы?']/a[text()='Войти']");
