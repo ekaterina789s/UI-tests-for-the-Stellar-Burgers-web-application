@@ -1,3 +1,4 @@
+import com.github.javafaker.Faker;
 import io.qameta.allure.Description;
 import io.qameta.allure.junit4.DisplayName;
 import org.junit.Test;
@@ -31,6 +32,34 @@ public class RegistrationTest extends BaseUITest {
         RegistrationPage regPage = authPage.clickLinkRegister();
 
         assertNotNull("Должна открыться страница регистрации", regPage);
+
+    }
+
+    @Test
+    @DisplayName("Успешная регистрация")
+    @Description("Должна открыться главная страница пользователя после успешной регистрации")
+    public void registration_SuccessTest() {
+
+        MainPage mainPage = new MainPage(driver);
+
+        AuthorizationPage authPage = mainPage.clickButtonPersonalAccount();
+
+        RegistrationPage regPage = authPage.clickLinkRegister();
+
+        //заполнение полей и клик по кнопке "Зарегистрироваться"
+
+        Faker faker = new Faker();
+
+        String testName = faker.name().fullName();
+        String testEmail = faker.internet().emailAddress();
+
+        regPage.writeName(testName);
+        regPage.writeEmail(testEmail);
+        regPage.writePassword(RegistrationPage.password);
+
+        MainPage mainPage2 = regPage.clickButtonRegister_Success();
+
+        assertNotNull("Должна открыться главная страница приложения", mainPage2);
 
     }
 }
