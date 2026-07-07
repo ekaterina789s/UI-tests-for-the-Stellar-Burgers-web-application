@@ -34,6 +34,7 @@ public class BaseUITest {
 
         driver = new ChromeDriver(options);
         driver.get("https://stellarburgers.education-services.ru/");
+        driver.manage().window().setSize(new Dimension(1920, 1080));
 
     }
 
