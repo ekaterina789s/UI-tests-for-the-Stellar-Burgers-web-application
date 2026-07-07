@@ -5,9 +5,12 @@ import io.restassured.RestAssured;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import page.AuthorizationPage;
 import page.MainPage;
+import user.UserModel;
 
 import static api.BaseUriData.BASE_URI;
+import static steps.CreateUserSteps.createUniqueUser;
 
 public class AuthorizationTest extends BaseUITest {
 
@@ -40,6 +43,26 @@ public class AuthorizationTest extends BaseUITest {
         authPage.fillEmailAndPassword_AuthPage(email, password);
 
         // Клик и проверка
+        MainPage mainPage2 = authPage.clickButtonEnter();
+
+        Assert.assertNotNull("Должна открыться главная страница", mainPage2);
+    }
+
+    @Test
+    @DisplayName("Вход через кнопку «Личный кабинет")
+    @Description("Пользователь должен успешно авторизоваться")
+    public void authorization_PersonalAccountButtonTest() {
+        String email = faker.internet().emailAddress();
+        String password = "password123";
+        String name = faker.name().fullName();
+
+        userModel = new UserModel(email, password, name);
+        var response = createUniqueUser(userModel);
+
+        MainPage mainPage = new MainPage(driver);
+        AuthorizationPage authPage = mainPage.clickButtonPersonalAccount();
+
+        authPage.fillEmailAndPassword_AuthPage(email, password);
         MainPage mainPage2 = authPage.clickButtonEnter();
 
         Assert.assertNotNull("Должна открыться главная страница", mainPage2);
