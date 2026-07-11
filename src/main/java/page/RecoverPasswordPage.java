@@ -1,5 +1,6 @@
 package page;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -19,10 +20,10 @@ public class RecoverPasswordPage {
     }
 
     //Ссылка "Войти"
-    public static final By LINK_ENTER_RECOVER_PAS = By.xpath(".//p[text()='Вспомнили пароль?']/a[text()='Войти']");
+    private static final By LINK_ENTER_RECOVER_PAS = By.xpath(".//p[text()='Вспомнили пароль?']/a[text()='Войти']");
 
-    //клик на ссылку "Войти"
-    public AuthorizationPage clickLinkEnter_RecoverPas() {
+    @Step("Клик на ссылку «Войти» в форме восстановления пароля")
+    public AuthorizationPage clickLinkEnterRecoverPas() {
         WebElement link = wait.until(ExpectedConditions.elementToBeClickable(LINK_ENTER_RECOVER_PAS));
         link.click();
         return new AuthorizationPage(driver);
