@@ -2,14 +2,26 @@ import com.github.javafaker.Faker;
 import io.qameta.allure.Description;
 import io.qameta.allure.junit4.DisplayName;
 import org.junit.Assert;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import page.AuthorizationPage;
 import page.MainPage;
 import page.RegistrationPage;
-
 import static org.junit.Assert.assertNotNull;
 
 public class RegistrationTest extends BaseUITest {
+
+    static Faker faker = new Faker();
+    private static String email;
+    private static String password;
+    private static String name;
+
+    @BeforeClass
+    public static void setUp() {
+        email = faker.internet().emailAddress();
+        password = "password123";
+        name = faker.name().fullName();
+    }
 
     @Test
     @DisplayName("Переход на страницу авторизации")
@@ -49,20 +61,13 @@ public class RegistrationTest extends BaseUITest {
 
         RegistrationPage regPage = authPage.clickLinkRegister();
 
-        //заполнение полей и клик по кнопке "Зарегистрироваться"
+        regPage.writeName(name);
+        regPage.writeEmail(email);
+        regPage.writePassword(password);
 
-        Faker faker = new Faker();
+        MainPage mainPageRegisteredUser = regPage.clickButtonRegisterSuccess();
 
-        String testName = faker.name().fullName();
-        String testEmail = faker.internet().emailAddress();
-
-        regPage.writeName(testName);
-        regPage.writeEmail(testEmail);
-        regPage.writePassword(RegistrationPage.password);
-
-        MainPage mainPage2 = regPage.clickButtonRegister_Success();
-
-        assertNotNull("Должна открыться главная страница приложения", mainPage2);
+        assertNotNull("Должна открыться главная страница приложения", mainPageRegisteredUser);
 
     }
 
@@ -77,24 +82,18 @@ public class RegistrationTest extends BaseUITest {
 
         RegistrationPage regPage = authPage.clickLinkRegister();
 
-        //заполнение полей и клик по кнопке "Зарегистрироваться"
-
-        Faker faker = new Faker();
-
-        String testName = faker.name().fullName();
-        String testEmail = faker.internet().emailAddress();
         String testPassword = "123";
 
-        regPage.writeName(testName);
-        System.out.println("Name filled: " + testName);
+        regPage.writeName(name);
+        System.out.println("Name filled: " + name);
 
-        regPage.writeEmail(testEmail);
-        System.out.println("Email filled: " + testEmail);
+        regPage.writeEmail(email);
+        System.out.println("Email filled: " + email);
 
         regPage.writePassword(testPassword);
         System.out.println("Password filled: " + testPassword);
 
-        String errorText = regPage.clickButtonRegister_Error();
+        String errorText = regPage.clickButtonRegisterError();
 
         Assert.assertEquals("Некорректный пароль", errorText);
     }
