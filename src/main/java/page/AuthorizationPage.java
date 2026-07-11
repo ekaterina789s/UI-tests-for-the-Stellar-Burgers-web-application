@@ -1,5 +1,6 @@
 package page;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -27,15 +28,15 @@ public class AuthorizationPage {
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
 
-    //клик по ссылке "Зарегистрироваться"
+    @Step("Клик по ссылке «Зарегистрироваться» на странице авторизации")
     public RegistrationPage clickLinkRegister() {
         WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(LINK_REGISTER));
         element.click();
         return new RegistrationPage(driver);
     }
 
-    // Заполнение полей Email и Пароль
-    public void fillEmailAndPassword_AuthPage(String email, String password) {
+    @Step("Заполнение полей Email и Пароль на странице авторизации")
+    public void fillEmailAndPasswordAuthPage(String email, String password) {
         WebElement emailField = driver.findElement(EMAIL_AUTH);
         emailField.clear();
         emailField.sendKeys(email);
@@ -45,14 +46,14 @@ public class AuthorizationPage {
         passwordField.sendKeys(password);
     }
 
-    //Клик на кнопку "Войти"
+    @Step("Клик на кнопку «Войти» на странице авторизации")
     public MainPage clickButtonEnter() {
         WebElement button = wait.until(ExpectedConditions.elementToBeClickable(BUTTON_ENTER));
         button.click();
         return new MainPage(driver);
     }
 
-    //Клик на ссылку "Восстановить пароль"
+    @Step("Клик на ссылку «Восстановить пароль» на странице авторизации")
     public RecoverPasswordPage clickLinkRecoverPassword(){
         WebElement link = wait.until(ExpectedConditions.elementToBeClickable(LINK_RECOVER_PASSWORD));
         link.click();
