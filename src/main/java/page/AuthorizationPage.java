@@ -13,14 +13,14 @@ public class AuthorizationPage {
     private final WebDriver driver;
     private final WebDriverWait wait;
 
-    public String email;
-    public String password;
+    private String email;
+    private String password;
 
-    public static final By LINK_REGISTER = By.xpath(".//p//a[normalize-space() = 'Зарегистрироваться']");
-    public static final By EMAIL_AUTH = By.xpath("//div[label[normalize-space() = 'Email']]//input");
-    public static final By PASSWORD_AUTH = By.xpath("//div[label[normalize-space() = 'Пароль']]//input[@type='password']");
-    public static final By BUTTON_ENTER = By.xpath("//button[normalize-space() = 'Войти']");
-    public static final By LINK_RECOVER_PASSWORD = By.xpath(".//a[text()='Восстановить пароль']");
+    private static final By LINK_REGISTER = By.xpath(".//p//a[normalize-space() = 'Зарегистрироваться']");
+    private static final By EMAIL_AUTH = By.xpath("//div[label[normalize-space() = 'Email']]//input");
+    private static final By PASSWORD_AUTH = By.xpath("//div[label[normalize-space() = 'Пароль']]//input[@type='password']");
+    private static final By BUTTON_ENTER = By.xpath("//button[normalize-space() = 'Войти']");
+    private static final By LINK_RECOVER_PASSWORD = By.xpath(".//a[text()='Восстановить пароль']");
 
     public AuthorizationPage(WebDriver driver) {
         this.driver = driver;
