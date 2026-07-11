@@ -12,7 +12,7 @@ public class BaseUITest {
 
     // ================= МЕНЯТЬ ТОЛЬКО ЗДЕСЬ =================
     // Поставьте "chrome" для обычного Chrome, "yandex" для Яндекс Браузера
-    private static final String TARGET_BROWSER = "yandex";
+    private static final String TARGET_BROWSER = "chrome";
     // =======================================================
 
     @Before
@@ -30,7 +30,8 @@ public class BaseUITest {
         }
 
         // Автоматически подтягивает драйвер под версию браузера
-        WebDriverManager.chromedriver().browserVersion("148").setup();
+        WebDriverManager.chromedriver().setup();
+        //WebDriverManager.chromedriver().browserVersion("148").setup(); если запускать "yandex"
 
         driver = new ChromeDriver(options);
         driver.get("https://stellarburgers.education-services.ru/");
@@ -45,5 +46,4 @@ public class BaseUITest {
         }
     }
 }
-
 
